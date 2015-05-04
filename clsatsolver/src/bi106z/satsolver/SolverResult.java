@@ -1,5 +1,8 @@
 package bi106z.satsolver;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 public class SolverResult {
@@ -31,5 +34,41 @@ public class SolverResult {
 
 	public List<List<Boolean>> getSolutions() {
 		return solutions;
+	}
+
+	public void saveCsv(String filename) throws IOException {
+		final String csvSeparator = ";";
+
+		PrintWriter bw = new PrintWriter(new FileWriter(filename));
+		
+		bw.write("\"Input problem:\"");
+		bw.println();
+
+		bw.write("\"Expression: \"" + csvSeparator + "\""
+				+ originalInput.getExpression() + "\"");
+		bw.println();
+		bw.println();
+		bw.write("\"Solution:\"");
+		bw.println();
+		bw.write("\"" + message + "\"");
+		bw.println();
+		bw.write("\"Calculation time: " + calculationTime + " ms\"");
+		bw.println();
+		bw.println();
+
+		for (int i = 0; i < originalInput.getLiterals().size(); i++) {
+			bw.write("\"" + originalInput.getLiterals().get(i) + "\""
+					+ csvSeparator);
+		}
+		bw.println();
+
+		for (List<Boolean> list : solutions) {
+			for (Boolean val : list) {
+				bw.write("\"" + (val ? "1" : "0") + "\""
+						+ csvSeparator);
+			}
+		}
+
+		bw.close();
 	}
 }

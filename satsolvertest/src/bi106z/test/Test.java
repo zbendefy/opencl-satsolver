@@ -44,6 +44,7 @@ public class Test {
 			return;
 		}
 		int currentDevice = 0;
+		SolverResult result = null;
 		
 		printHelp();
 		System.out.println("");
@@ -90,20 +91,32 @@ public class Test {
 				}else if (command.startsWith("loadfile ")) {
 					String filename = command.replace("loadfile ", "");
 					System.out.println("Computing started on device: " + deviceList.get(currentDevice).getDeviceName());
-					SolverResult result = solver.runSolver(SolverInput
+					result = solver.runSolver(SolverInput
 							.createFromCNFFile(filename.trim()));
 					printResult(result);
 				}
 				else if (command.startsWith("solve ")) {
 					String expression = command.replace("solve ", "");
 					System.out.println("Computing started on device: " + deviceList.get(currentDevice).getDeviceName());
-					SolverResult result = solver.runSolver(SolverInput
+					result = solver.runSolver(SolverInput
 							.createFromExpression(expression));
 					printResult(result);
 				} else if (command.startsWith("help")) {
 					printHelp();
 				}  else if (command.startsWith("exit")) {
 					System.exit(0);
+				}
+				else if (command.startsWith("savecsv ")) {
+					String filename = command.replace("saveresults ", "");
+					if (result != null)
+					{
+						result.saveCsv(filename);
+						System.out.println("File saved successfully!");
+					}
+					else
+					{
+						throw new Exception("No results are stored yet!");
+					}
 				}
 				else
 				{
@@ -127,8 +140,9 @@ public class Test {
 		System.out.println("solve <expression>       Example: solve  (A | B) & (C | !D)");
 		System.out.println("loadfile <filename>      Example: loadfile C:\\problem.cnf");
 		System.out.println("listdevices              Lists all available OpenCL devices");
-		System.out.println("changedevice <deviceid>  Switches the currently used device. Example: changedevice 3");
+		System.out.println("changedevice <deviceid>  Switches the currently used device. e.g: changedevice 3");
 		System.out.println("showdevice               Prints info about current device");
+		System.out.println("savecsv                  Saves the last calc result as a csv file");
 		System.out.println("help                     Prints this help");
 		System.out.println("exit                     Exits");
 		System.out.println("");
