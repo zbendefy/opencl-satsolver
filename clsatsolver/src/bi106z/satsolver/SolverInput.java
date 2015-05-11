@@ -21,7 +21,7 @@ public class SolverInput {
 		List<Integer> tree = new ArrayList<Integer>();
 
 		// Gathering literals4
-		List<Character> text = new ArrayList<Character>();
+		List<Character> text = new ArrayList<Character>(expression.length());
 		for (char c : expression.toCharArray()) {
 			text.add(c);
 		}
