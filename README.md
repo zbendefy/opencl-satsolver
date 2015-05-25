@@ -13,7 +13,7 @@ Note that above 24-26 variables calculation times can be very-very long.
 
 
 
-## There are 2 methods implemented:
+#### There are 2 methods implemented:
  * The Single/simple solver will return a byte array where each byte represents a solution.
  * The Multi solver will pack 8 results into a byte (each bit is represents 1 solution), to save on memory (and to allow more variables). 
 For larger problems, the multi solver method is automatically selected.
