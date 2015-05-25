@@ -7,6 +7,7 @@ There is a test app included, that can be used to try the libs features.
 ##Features:
   * Supports expressions up to 62 boolean variables
   * AND, OR, NEGATE operators
+  * Can evaluate expressions like: A & B | (C & !D)
   * Can load .CNF files
 
 Note that above 24-26 variables calculation times can be very-very long.
