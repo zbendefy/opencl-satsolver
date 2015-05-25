@@ -10,3 +10,9 @@ Features:
   * Can load .CNF files
 
 Note that above 24-26 variables calculation times can be very-very long.
+
+
+
+There are 2 methods implemented:
+Single/simple solver will return a byte array where each byte represents a solution.
+The Multi solver will pack 8 results into a byte (each bit is represents 1 solution), to save on memory. For larger problems, this method is automatically selected.
